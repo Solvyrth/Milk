@@ -1,0 +1,17 @@
+# Requirements pour le Générateur de Mots de Passe
+# Python 3.6+ requis
+
+# Interface graphique Tkinter (inclus avec Python)
+# Pas de dépendances externes requises
+
+# Modules utilisés (tous inclus dans la bibliothèque standard Python) :
+# - tkinter : Interface graphique
+# - random : Génération aléatoire
+# - string : Constantes de chaînes
+# - os : Opérations système
+# - webbrowser : Ouverture de liens
+# - datetime : Gestion des dates
+# - filedialog : Dialogue de fichiers
+
+# Note: Ce projet utilise uniquement la bibliothèque standard Python
+# Aucune installation de package tiers n'est nécessaire
