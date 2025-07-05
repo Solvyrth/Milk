@@ -34,158 +34,85 @@ class PasswordGeneratorApp:
         # Ne pas générer de mots de passe automatiquement au démarrage
         
     def setup_ui(self):
-        # Titre principal avec style macOS
-        title_frame = tk.Frame(self.root, bg=self.bg_dark)
-        title_frame.pack(pady=30)
-        
-        title_label = ttk.Label(title_frame, text="🔐 Générateur de Mots de Passe", style='Title.TLabel')
-        title_label.pack()
-        
+        # --- HEADER ---
+        title_frame = tk.Frame(self.root, bg=self.bg_dark, highlightthickness=0, bd=0)
+        title_frame.pack(pady=(32, 8))
 
-        # Crédit stylé avec lien GitHub cliquable et effet hover
-        credits_frame = tk.Frame(title_frame, bg=self.bg_dark)
-        credits_frame.pack(pady=8)
-        
-        # Texte des crédits
-        tk.Label(credits_frame, text="Développé par Solvyrth •", font=("SF Pro Text", 11),
-                bg=self.bg_dark, fg=self.text_secondary).pack(side=tk.LEFT)
-        
-        # Lien GitHub cliquable avec style macOS
+        title_label = ttk.Label(title_frame, text="Milk", style='Title.TLabel')
+        title_label.pack(pady=(0, 2))
+
+        # Crédit professionnel, espacé et aligné
+        credits_frame = tk.Frame(title_frame, bg=self.bg_dark, highlightthickness=0, bd=0)
+        credits_frame.pack()
+        tk.Label(credits_frame, text="Développé par Solvyrth", font=("SF Pro Text", 10, "italic"), bg=self.bg_dark, fg=self.text_secondary, bd=0, padx=0, pady=0).pack(side=tk.LEFT)
         import webbrowser
-        github_label = tk.Label(credits_frame, text="GitHub", font=("SF Pro Text", 11, "underline"),
-                               bg=self.bg_dark, fg=self.accent_blue, cursor="hand2")
+        github_label = tk.Label(credits_frame, text="· GitHub", font=("SF Pro Text", 10, "underline"), bg=self.bg_dark, fg=self.accent_blue, cursor="hand2", bd=0, padx=0, pady=0)
         github_label.pack(side=tk.LEFT)
         github_label.bind("<Button-1>", lambda e: webbrowser.open("https://github.com/Solvyrth"))
-        # Effet hover
         github_label.bind("<Enter>", lambda e: github_label.config(fg="#0051D0"))
         github_label.bind("<Leave>", lambda e: github_label.config(fg=self.accent_blue))
-        
-        version_label = ttk.Label(title_frame, text="Version 2.0", style='Subtitle.TLabel')
-        version_label.pack()
-        
-        # Frame principal avec coins arrondis (effet visuel)
-        main_frame = tk.Frame(self.root, bg=self.bg_secondary, relief='flat', bd=0)
-        main_frame.pack(padx=30, pady=20, fill='both', expand=True)
-        
-        # Configuration du mot de passe avec style macOS
-        config_frame = tk.Frame(main_frame, bg=self.bg_secondary)
-        config_frame.pack(pady=25, padx=25, fill='x')
-        
-        # Longueur avec style macOS (fix largeur)
-        length_frame = tk.Frame(config_frame, bg=self.bg_secondary)
-        length_frame.pack(fill='x', pady=12, padx=8)
-        length_label = tk.Label(length_frame, text="Longueur du mot de passe:", 
-                               bg=self.bg_secondary, fg=self.text_primary, font=('SF Pro Text', 12))
-        length_label.pack(side='left', padx=(0,10))
-        self.length_var = tk.StringVar(value="16")
-        length_spinbox = tk.Spinbox(length_frame, from_=4, to=30, textvariable=self.length_var, width=8, 
-                                   font=('SF Pro Text', 11), bg=self.bg_tertiary, fg=self.text_primary,
-                                   buttonbackground=self.bg_tertiary, relief='flat', bd=1,
-                                   insertbackground=self.text_primary, selectbackground=self.accent_blue)
-        length_spinbox.pack(side='right', padx=(10,0), pady=2)
 
-        # Nombre de mots de passe (fix largeur)
-        count_frame = tk.Frame(config_frame, bg=self.bg_secondary)
-        count_frame.pack(fill='x', pady=12, padx=8)
-        count_label = tk.Label(count_frame, text="Nombre de mots de passe:", 
-                              bg=self.bg_secondary, fg=self.text_primary, font=('SF Pro Text', 12))
-        count_label.pack(side='left', padx=(0,10))
+        version_label = ttk.Label(title_frame, text="Version • 2.1", style='Subtitle.TLabel')
+        version_label.pack(pady=(2, 0))
+
+        # --- MAIN CARD ---
+        main_frame = tk.Frame(self.root, bg=self.bg_secondary, relief='flat', bd=0, highlightthickness=0)
+        main_frame.pack(padx=20, pady=8, fill='both', expand=True)
+
+        # --- CONFIG ---
+        config_frame = tk.Frame(main_frame, bg=self.bg_secondary, highlightthickness=0, bd=0)
+        config_frame.pack(pady=12, padx=12, fill='x')
+
+        # Longueur
+        length_frame = tk.Frame(config_frame, bg=self.bg_secondary, highlightthickness=0, bd=0)
+        length_frame.pack(fill='x', pady=6, padx=2)
+        length_label = tk.Label(length_frame, text="Longueur", bg=self.bg_secondary, fg=self.text_primary, font=('SF Pro Text', 10, 'bold'), padx=0, pady=0)
+        length_label.pack(side='left', padx=(0,6))
+        self.length_var = tk.StringVar(value="16")
+        length_spinbox = tk.Spinbox(length_frame, from_=4, to=30, textvariable=self.length_var, width=4, font=('SF Pro Text', 10), bg=self.bg_tertiary, fg=self.text_primary, buttonbackground=self.bg_tertiary, relief='flat', bd=1, insertbackground=self.text_primary, selectbackground=self.accent_blue, highlightthickness=0, justify='center')
+        length_spinbox.pack(side='right', padx=(6,0), pady=0)
+
+        # Nombre
+        count_frame = tk.Frame(config_frame, bg=self.bg_secondary, highlightthickness=0, bd=0)
+        count_frame.pack(fill='x', pady=6, padx=2)
+        count_label = tk.Label(count_frame, text="Nombre", bg=self.bg_secondary, fg=self.text_primary, font=('SF Pro Text', 10, 'bold'), padx=0, pady=0)
+        count_label.pack(side='left', padx=(0,6))
         self.count_var = tk.StringVar(value="3")
-        count_spinbox = tk.Spinbox(count_frame, from_=1, to=10, textvariable=self.count_var, width=8, 
-                                  font=('SF Pro Text', 11), bg=self.bg_tertiary, fg=self.text_primary,
-                                  buttonbackground=self.bg_tertiary, relief='flat', bd=1,
-                                  insertbackground=self.text_primary, selectbackground=self.accent_blue)
-        count_spinbox.pack(side='right', padx=(10,0), pady=2)
-        
-        # Options avec style macOS
-        options_frame = tk.Frame(config_frame, bg=self.bg_secondary)
-        options_frame.pack(fill='x', pady=20)
-        
-        options_title = tk.Label(options_frame, text="Options:", 
-                                bg=self.bg_secondary, fg=self.text_primary, font=('SF Pro Text', 14, 'bold'))
-        options_title.pack(anchor='w', pady=(0, 10))
-        
-        self.special_chars_var = tk.BooleanVar(value=True)
-        special_check = tk.Checkbutton(options_frame, text="🔣 Inclure des caractères spéciaux (!@#$%^&*)", 
-                                     variable=self.special_chars_var, bg=self.bg_secondary, fg=self.text_primary, 
-                                     selectcolor=self.accent_blue, font=('SF Pro Text', 11),
-                                     activebackground=self.bg_secondary, activeforeground=self.text_primary,
-                                     relief='flat', bd=0)
-        special_check.pack(anchor='w', pady=3)
-        
-        self.uppercase_var = tk.BooleanVar(value=True)
-        upper_check = tk.Checkbutton(options_frame, text="🔤 Inclure des majuscules (A-Z)", 
-                                   variable=self.uppercase_var, bg=self.bg_secondary, fg=self.text_primary, 
-                                   selectcolor=self.accent_blue, font=('SF Pro Text', 11),
-                                   activebackground=self.bg_secondary, activeforeground=self.text_primary,
-                                   relief='flat', bd=0)
-        upper_check.pack(anchor='w', pady=3)
-        
-        self.lowercase_var = tk.BooleanVar(value=True)
-        lower_check = tk.Checkbutton(options_frame, text="🔡 Inclure des minuscules (a-z)", 
-                                   variable=self.lowercase_var, bg=self.bg_secondary, fg=self.text_primary, 
-                                   selectcolor=self.accent_blue, font=('SF Pro Text', 11),
-                                   activebackground=self.bg_secondary, activeforeground=self.text_primary,
-                                   relief='flat', bd=0)
-        lower_check.pack(anchor='w', pady=3)
-        
-        self.numbers_var = tk.BooleanVar(value=True)
-        numbers_check = tk.Checkbutton(options_frame, text="🔢 Inclure des chiffres (0-9)", 
-                                     variable=self.numbers_var, bg=self.bg_secondary, fg=self.text_primary, 
-                                     selectcolor=self.accent_blue, font=('SF Pro Text', 11),
-                                     activebackground=self.bg_secondary, activeforeground=self.text_primary,
-                                     relief='flat', bd=0)
-        numbers_check.pack(anchor='w', pady=3)
-        
-        # Boutons avec style macOS et contraste optimal
-        buttons_frame = tk.Frame(main_frame, bg=self.bg_secondary)
-        buttons_frame.pack(pady=25)
-        
-        generate_btn = tk.Button(buttons_frame, text="🎲 Générer", command=self.on_generate_click,
-                               bg=self.accent_blue, fg='#000000', font=('SF Pro Text', 12, 'bold'), 
-                               relief='flat', bd=0, padx=25, pady=12, cursor='hand2',
-                               activebackground='#0056b3', activeforeground='#000000')
-        generate_btn.pack(side='left', padx=8)
-        
-        save_btn = tk.Button(buttons_frame, text="💾 Sauvegarder", command=self.save_to_file,
-                           bg=self.accent_green, fg='#000000', font=('SF Pro Text', 12, 'bold'), 
-                           relief='flat', bd=0, padx=25, pady=12, cursor='hand2',
-                           activebackground='#28a745', activeforeground='#000000')
-        save_btn.pack(side='left', padx=8)
-        
-        clear_btn = tk.Button(buttons_frame, text="🗑️ Effacer", command=self.clear_results,
-                            bg=self.accent_red, fg='#000000', font=('SF Pro Text', 12, 'bold'), 
-                            relief='flat', bd=0, padx=25, pady=12, cursor='hand2',
-                            activebackground='#dc3545', activeforeground='#000000')
-        clear_btn.pack(side='left', padx=8)
-        
-        # Zone de résultats avec style macOS
-        results_frame = tk.Frame(main_frame, bg=self.bg_secondary)
-        results_frame.pack(fill='both', expand=True, padx=25, pady=25)
-        
-        results_title = tk.Label(results_frame, text="📋 Mots de passe générés:", 
-                                bg=self.bg_secondary, fg=self.text_primary, font=('SF Pro Text', 14, 'bold'))
-        results_title.pack(anchor='w', pady=(0, 10))
-        
-        # Zone de texte avec scrollbar style macOS
-        text_frame = tk.Frame(results_frame, bg=self.bg_secondary)
-        text_frame.pack(fill='both', expand=True, pady=10)
-        
-        self.results_text = tk.Text(text_frame, height=12, font=('SF Mono', 11), 
-                                  bg=self.bg_tertiary, fg=self.text_primary, insertbackground=self.accent_blue,
-                                  relief='flat', bd=1, selectbackground=self.accent_blue, selectforeground='white',
-                                  wrap='word', padx=15, pady=15)
-        
-        scrollbar = tk.Scrollbar(text_frame, orient='vertical', command=self.results_text.yview,
-                               bg=self.bg_tertiary, troughcolor=self.bg_secondary, 
-                               activebackground=self.text_secondary, relief='flat', bd=0)
+        count_spinbox = tk.Spinbox(count_frame, from_=1, to=10, textvariable=self.count_var, width=4, font=('SF Pro Text', 10), bg=self.bg_tertiary, fg=self.text_primary, buttonbackground=self.bg_tertiary, relief='flat', bd=1, insertbackground=self.text_primary, selectbackground=self.accent_blue, highlightthickness=0, justify='center')
+        count_spinbox.pack(side='right', padx=(6,0), pady=0)
+
+        # --- OPTIONS ---
+        options_frame = tk.Frame(config_frame, bg=self.bg_secondary, highlightthickness=0, bd=0)
+        options_frame.pack(fill='x', pady=8)
+        for text, var, icon in [
+            ("Caractères spéciaux", 'special_chars_var', "🔣"),
+            ("Majuscules", 'uppercase_var', "🔤"),
+            ("Minuscules", 'lowercase_var', "🔡"),
+            ("Chiffres", 'numbers_var', "🔢")]:
+            setattr(self, var, tk.BooleanVar(value=True))
+            cb = tk.Checkbutton(options_frame, text=f"{icon} {text}", variable=getattr(self, var), bg=self.bg_secondary, fg=self.text_primary, selectcolor=self.accent_blue, font=('SF Pro Text', 10), activebackground=self.bg_secondary, activeforeground=self.text_primary, relief='flat', bd=0, highlightthickness=0, padx=0, pady=0)
+            cb.pack(anchor='w', pady=1)
+
+        # --- BOUTONS ---
+        buttons_frame = tk.Frame(main_frame, bg=self.bg_secondary, highlightthickness=0, bd=0)
+        buttons_frame.pack(pady=10)
+        btn_style = {'font': ('SF Pro Text', 10, 'bold'), 'relief': 'flat', 'bd': 0, 'padx': 14, 'pady': 6, 'cursor': 'hand2', 'highlightthickness': 0}
+        generate_btn = tk.Button(buttons_frame, text="Générer", command=self.on_generate_click, bg=self.accent_blue, fg='#222', activebackground='#0051D0', activeforeground='#222', **btn_style)
+        generate_btn.pack(side='left', padx=4)
+        save_btn = tk.Button(buttons_frame, text="Sauvegarder", command=self.save_to_file, bg=self.accent_green, fg='#222', activebackground='#249944', activeforeground='#222', **btn_style)
+        save_btn.pack(side='left', padx=4)
+        clear_btn = tk.Button(buttons_frame, text="Effacer", command=self.clear_results, bg=self.accent_red, fg='#222', activebackground='#b91d1d', activeforeground='#222', **btn_style)
+        clear_btn.pack(side='left', padx=4)
+
+        # --- RESULTATS ---
+        results_frame = tk.Frame(main_frame, bg=self.bg_secondary, highlightthickness=0, bd=0)
+        results_frame.pack(fill='both', expand=True, padx=10, pady=6)
+        self.results_text = tk.Text(results_frame, height=8, font=('SF Mono', 10), bg=self.bg_tertiary, fg=self.text_primary, insertbackground=self.accent_blue, relief='flat', bd=1, selectbackground=self.accent_blue, selectforeground='#fff', wrap='word', padx=8, pady=8, highlightthickness=0)
+        scrollbar = tk.Scrollbar(results_frame, orient='vertical', command=self.results_text.yview, bg=self.bg_tertiary, troughcolor=self.bg_secondary, activebackground=self.text_secondary, relief='flat', bd=0, highlightthickness=0)
         self.results_text.configure(yscrollcommand=scrollbar.set)
-        
         self.results_text.pack(side='left', fill='both', expand=True)
         scrollbar.pack(side='right', fill='y')
-        
-        # Message initial dans la zone de résultats
-        self.results_text.insert(tk.END, "\nBienvenue !\n\nCliquez sur 'Générer' pour créer vos mots de passe sécurisés.\n\nAucun mot de passe n'est généré tant que vous n'avez pas cliqué sur le bouton.")
+        self.results_text.insert(tk.END, "\nCliquez sur Générer pour créer vos mots de passe sécurisés.\n\nAucun mot de passe n'est généré tant que vous n'avez pas cliqué sur le bouton.")
         self.generated_passwords = []
     
     def on_generate_click(self):
