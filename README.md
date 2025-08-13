@@ -7,8 +7,6 @@
 
 **Milk** est un générateur de mots de passe moderne et sécurisé avec une interface graphique élégante. Conçu pour la simplicité et la sécurité, il vous permet de créer des mots de passe robustes selon vos critères personnalisés.
 
-![Milk Interface](https://via.placeholder.com/800x500/0F0F23/E8E8F0?text=Milk+-+G%C3%A9n%C3%A9rateur+de+Mots+de+Passe)
-
 ## ✨ Fonctionnalités
 
 ### 🔐 Génération Sécurisée
