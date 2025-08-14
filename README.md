@@ -1,183 +1,268 @@
-# 🥛 Milk - Générateur de Mots de Passe
+# ✨ Milk - Générateur de Mots de Passe v3.1
 
-[![Python Version](https://img.shields.io/badge/python-3.6%2B-blue)](https://www.python.org/downloads/)
-[![License](https://img.shields.io/badge/license-MIT-green)](LICENSE)
-[![Platform](https://img.shields.io/badge/platform-macOS%20%7C%20Windows%20%7C%20Linux-lightgrey)]()
-[![Version](https://img.shields.io/badge/version-3.0-brightgreen)](https://github.com/Solvyrth/milk)
+Un générateur de mots de passe élégant et sécurisé avec interface macOS native.
 
-**Milk** est un générateur de mots de passe moderne et sécurisé avec une interface graphique élégante. Conçu pour la simplicité et la sécurité, il vous permet de créer des mots de passe robustes selon vos critères personnalisés.
+## 🆕 Nouveautés Version 3.1
 
-## ✨ Fonctionnalités
+### 🎭 Mode Passphrase
+- **Phrases de passe mémorables** : Génère des passphrases lisibles comme "Grand-Maison-Vole-Avec-Etoile-92"
+- **Structure intelligente** : Combine adjectifs, noms, verbes et connecteurs
+- **Paramètres flexibles** : 3 à 8 mots avec options de capitalisation, séparateurs et chiffres
+- **Mémorisation facilitée** : Alternative moderne aux mots de passe complexes
 
-### 🔐 Génération Sécurisée
-- **Génération aléatoire cryptographiquement sûre**
-- Longueur configurable (4-64 caractères)
-- Support de multiple types de caractères
-- Génération en lot (jusqu'à 20 mots de passe)
+### 📚 Mode Dictionnaire
+- **Génération basée sur des mots réels** : Crée des mots de passe mémorisables en partant de mots de base
+- **7 catégories de mots** : Animaux, Nature, Couleurs, Technologie, Actions, Adjectifs, Objets
+- **Modifications de sécurité automatiques** :
+  - Capitalisation aléatoire
+  - Substitution de caractères (a→@, e→3, i→!, etc.)
+  - Ajout de chiffres et symboles
+  - Mélange intelligent pour maximiser la sécurité
 
-### 🎨 Interface Moderne
-- Design moderne inspiré des applications natives macOS
-- Thème sombre élégant avec palette de couleurs cohérente
-- Interface responsive et intuitive
-- Animations et effets visuels subtils
+### 🎨 Interface Repensée
+- **Layout horizontal optimisé** : Modes avancés côte à côte pour une meilleure utilisation de l'espace
+- **Options compactes** : Grilles 2x2 et organisation intelligente des contrôles
+- **Aperçus en temps réel** : Boutons "👁️ Aperçu" pour tester les paramètres
+- **Validation automatique** : Messages d'aide et configuration auto pour éviter les erreurs
 
-### ⚙️ Options de Personnalisation
-- 🏛️ **Lettres majuscules** (A-Z)
-- 🌊 **Lettres minuscules** (a-z)  
-- 💎 **Chiffres** (0-9)
-- ⚡ **Caractères spéciaux** (!@#$%^&*()_+-=[]{}|;:,.<>?)
+### 🎯 Exemples de Génération
 
-### 💾 Export et Sauvegarde
-- Sauvegarde en formats TXT, CSV, JSON
-- Rapports détaillés avec analyses de sécurité
-- Métadonnées de session et conseils de sécurité
-- Horodatage automatique des fichiers
+**Mode Classique :**
+```
+K9@mL7#pX2$vN4!wQ
+```
 
-## 📋 Prérequis
+**Mode Dictionnaire :**
+```
+Dr@g0n!47#          (basé sur "dragon")
+M0nt@gne$92         (basé sur "montagne") 
+R0b0t&!345          (basé sur "robot")
+```
 
-- **Python 3.6+** (inclut Tkinter par défaut)
-- **Système d'exploitation** : macOS, Windows, ou Linux
-- **Aucune dépendance externe** - utilise uniquement la bibliothèque standard Python
+**Mode Passphrase :**
+```
+Brillant-Ocean-Vole-Avec-Montagne-847
+Secret_Jardin_Danse_Durant_Aventure_23
+Mysterieux.Etoile.Chante.Grace.Liberte.156
+```
 
-## 🚀 Installation et Utilisation
+## 🚀 Fonctionnalités
 
-### Installation
+### ⚡ Interface Moderne
+- **Design macOS natif** avec boutons rouge/jaune/vert fonctionnels
+- **Thème sombre** optimisé pour le confort visuel
+- **Fenêtre personnalisée** sans bordures système
+- **Drag & Drop** pour déplacer la fenêtre
+
+### 🔒 Sécurité Avancée
+- **Génération locale** - Aucune donnée transmise
+- **Entropy élevée** - Combinaisons cryptographiquement sécurisées
+- **Validation automatique** des paramètres
+- **Conseils de sécurité** intégrés
+
+### 📊 Options de Personnalisation
+- **Longueur** : 4 à 64 caractères
+- **Quantité** : 1 à 20 mots de passe
+- **Types de caractères** configurables
+- **Export** en formats TXT, CSV, JSON
+
+## 🛠️ Installation
 
 ```bash
 # Cloner le repository
-git clone https://github.com/Solvyrth/milk.git
-cd milk
+git clone https://github.com/Solvyrth/milk-password-generator
 
-# Le projet n'a pas de dépendances externes !
-# Tkinter est inclus avec Python par défaut
-```
+# Naviguer dans le dossier
+cd milk-password-generator
 
-### Lancement
-
-```bash
-# Exécuter directement le script
-python Milk.py
-
-# Ou sur certains systèmes
+# Lancer l'application
 python3 Milk.py
 ```
 
-### Utilisation
+### Prérequis
+- Python 3.7+
+- tkinter (inclus avec Python)
+- macOS 10.12+ (pour le design natif)
 
-1. **Configuration** : Ajustez la longueur et le nombre de mots de passe souhaités
-2. **Options** : Sélectionnez les types de caractères à inclure
-3. **Génération** : Cliquez sur "🚀 Générer les mots de passe"
-4. **Sauvegarde** : Utilisez "💎 Sauvegarder" pour exporter vos résultats
+## 📖 Guide d'Utilisation
 
-## 🛡️ Sécurité
+### Mode Classique
+1. Définissez la longueur et le nombre de mots de passe
+2. Sélectionnez les types de caractères
+3. Cliquez sur "🚀 Générer"
 
-### Algorithme de Génération
-- Utilise le module `random` de Python avec `random.choice()`
-- Génération locale uniquement - aucune donnée transmise en ligne
-- Pas de stockage ou journalisation des mots de passe générés
+### Mode Dictionnaire (v3.1)
+1. Activez "📚 Utiliser des mots de base du dictionnaire"
+2. Choisissez vos catégories préférées
+3. Configurez les modifications de sécurité
+4. Cliquez sur "🚀 Générer"
 
-### Recommandations de Sécurité
+### Mode Passphrase (v3.1)
+1. Activez "🎭 Générer des phrases de passe mémorables"
+2. Définissez le nombre de mots (3-8)
+3. Configurez les options (capitalisation, séparateurs, chiffres)
+4. Cliquez sur "🚀 Générer"
+
+### Sauvegarde
+- **Format détaillé** avec métadonnées complètes
+- **Analyse de sécurité** automatique
+- **Conseils personnalisés** inclus
+
+## 🏗️ Architecture Technique
+
+```
+Milk.py
+├── Interface utilisateur (tkinter)
+├── Gestionnaire de fenêtre personnalisé
+├── Générateur classique (aléatoire pur)
+├── Générateur dictionnaire (v3.1)
+│   ├── 7 catégories de mots (105+ mots)
+│   ├── Substitutions de caractères
+│   └── Modifications de sécurité
+├── Générateur passphrase (v3.1)
+│   ├── 4 types de mots (noms, adjectifs, verbes, connecteurs)
+│   ├── Patterns intelligents
+│   └── Options de formatage
+└── Export & analyse de sécurité
+```
+
+## 🎨 Dictionnaires Intégrés
+
+### Mode Dictionnaire
+| Catégorie | Exemples | Icône |
+|-----------|----------|--------|
+| **Animaux** | chat, lion, tigre, aigle | 🦁 |
+| **Nature** | montagne, océan, forêt | 🌲 |
+| **Couleurs** | rouge, bleu, violet | � |
+| **Technologie** | robot, laser, quantum | 💻 |
+| **Actions** | courir, voler, danser | ⚡ |
+| **Adjectifs** | grand, beau, rapide | ✨ |
+| **Objets** | maison, voiture, livre | 🏠 |
+
+### Mode Passphrase
+| Type | Exemples | Usage |
+|------|----------|--------|
+| **Noms** | soleil, montagne, océan | Bases descriptives |
+| **Adjectifs** | magnifique, brillant, mystérieux | Qualificatifs |
+| **Verbes** | brille, danse, vole | Actions dynamiques |
+| **Connecteurs** | avec, vers, dans | Liaisons naturelles |
+
+## 🔧 Personnalisation
+
+### Ajouter des Mots au Dictionnaire
+```python
+# Mode Dictionnaire
+self.password_dictionary['votre_categorie'] = [
+    'mot1', 'mot2', 'mot3', ...
+]
+
+# Mode Passphrase
+self.passphrase_dictionary['noms'] = [
+    'nouveau_nom1', 'nouveau_nom2', ...
+]
+```
+
+### Modifier les Substitutions
+```python
+self.char_substitutions['lettre'] = ['@', '4', 'A']
+```
+
+## 📈 Analyse de Sécurité
+
+L'application calcule automatiquement :
+- **Taille du jeu de caractères**
+- **Nombre de combinaisons possibles** 
+- **Force estimée** du mot de passe
+- **Recommandations personnalisées**
+
+## 🛡️ Bonnes Pratiques
+
 - ✅ Un mot de passe unique par compte
-- ✅ Longueur minimale recommandée : 12 caractères
-- ✅ Inclure tous les types de caractères
-- ✅ Utiliser un gestionnaire de mots de passe
-- ✅ Activer l'authentification à deux facteurs (2FA)
+- ✅ Longueur minimale de 12 caractères
+- ✅ Mélange de types de caractères
+- ✅ Utilisation d'un gestionnaire de mots de passe
+- ✅ Activation de l'authentification 2FA
 
-## 📊 Analyse de Complexité
+## 🐛 Résolution de Problèmes
 
-Le générateur évalue automatiquement la force de vos mots de passe :
+### L'application ne se lance pas
+```bash
+# Vérifier Python
+python3 --version
 
-| Longueur | Types de caractères | Combinaisons | Force |
-|----------|-------------------|--------------|-------|
-| 8+ chars | Lettres seules (52) | ~5×10¹³ | 🟠 Moyenne |
-| 12+ chars | Lettres + chiffres (62) | ~3×10²¹ | 🟡 Élevée |
-| 16+ chars | Tous types (94) | ~6×10³¹ | 🟢 Très élevée |
-
-## 📁 Structure du Projet
-
-```
-Password/
-├── Milk.py              # Application principale
-├── requirements.txt     # Documentation des dépendances
-└── README.md           # Ce fichier
+# Vérifier tkinter
+python3 -c "import tkinter; print('tkinter OK')"
 ```
 
-## 🎨 Aperçu de l'Interface
-
-### Sections Principales
-
-- **🎯 Header** : Titre, branding et informations développeur
-- **⚙️ Configuration** : Paramètres de longueur et nombre
-- **🎭 Options** : Sélection des types de caractères
-- **🚀 Actions** : Boutons de génération, sauvegarde et effacement
-- **💎 Résultats** : Affichage formaté avec conseils de sécurité
-
-### Design Features
-
-- Palette de couleurs moderne (bleus sombres + accents)
-- Typographie : SF Pro Display/Text (style Apple)
-- Icônes emoji pour une navigation intuitive
-- Scrollbar personnalisée et responsive design
-
-## 🔧 Développement
-
-### Architecture
-- **Pattern MVC** : Séparation logique de l'interface et de la logique
-- **Programmation orientée objet** : Code modulaire et maintenable
-- **Gestion d'erreurs robuste** : Validation des entrées et messages informatifs
-
-### Personnalisation
-Le code est structuré pour faciliter la personnalisation :
-- Palette de couleurs centralisée dans `self.colors`
-- Styles TTK configurables
-- Messages et textes facilement modifiables
-
-## 📈 Roadmap
-
-### Version 3.1 (Prochaine)
-- [ ] Support des dictionnaires de mots de passe
-- [ ] Générateur de phrases de passe (passphrases)
-- [ ] Tests d'entropy avancés
-- [ ] Mode ligne de commande
-
-### Version 4.0 (Future)
-- [ ] Chiffrement des fichiers de sauvegarde
-- [ ] Integration avec des gestionnaires de mots de passe
-- [ ] API REST pour intégrations
-- [ ] Support multilingue
-
-## 🤝 Contribution
-
-Les contributions sont les bienvenues ! N'hésitez pas à :
-
-1. 🍴 **Fork** le projet
-2. 🌿 Créer une **branche feature** (`git checkout -b feature/AmazingFeature`)
-3. 💾 **Commit** vos changements (`git commit -m 'Add some AmazingFeature'`)
-4. 📤 **Push** vers la branche (`git push origin feature/AmazingFeature`)
-5. 🔄 Ouvrir une **Pull Request**
+### Boutons macOS non visibles
+- Assurez-vous d'être sur macOS
+- Redémarrez l'application
+- Vérifiez la résolution d'écran
 
 ## 📄 Licence
 
-Distribué sous la licence MIT. Voir `LICENSE` pour plus d'informations.
+MIT License - Libre d'utilisation et modification
 
-## 👨‍💻 Auteur
+## 👨‍💻 Développement
 
-**Solvyrth**
-- 🐙 GitHub: [@Solvyrth](https://github.com/Solvyrth)
-- 📧 Contact: [Créer une issue](https://github.com/Solvyrth/milk/issues)
+**Développeur :** [Solvyrth](https://github.com/Solvyrth)  
+**Version :** 3.1  
+**Dernière mise à jour :** Août 2025  
+
+### Historique des Versions
+- **v3.1** : Mode passphrase, mode dictionnaire amélioré, interface optimisée
+- **v3.0** : Interface macOS native, thème sombre  
+- **v2.x** : Fonctionnalités de base
+
+## ⭐ Soutenez le Projet
+
+Si Milk vous aide à sécuriser vos comptes, n'hésitez pas à :
+- ⭐ **Mettre une étoile** sur GitHub - cela aide énormément !
+- 🍴 **Fork** le projet pour vos propres améliorations
+- 📢 **Partagez** avec vos amis et collègues
+- 🐛 **Signalez des bugs** ou proposez des fonctionnalités
 
 ## 🙏 Remerciements
 
-- Python Software Foundation pour l'excellent écosystème Python
-- La communauté open source pour l'inspiration
-- Tous les contributeurs et utilisateurs de Milk
+### 🐍 Python & Sa Communauté
+Un immense merci à **Guido van Rossum** et toute la communauté Python pour avoir créé ce langage extraordinaire qui rend le développement si accessible et élégant. Milk n'existerait pas sans :
+
+- **Python** - Pour sa simplicité et sa puissance
+- **tkinter** - Pour l'interface graphique native
+- **random & string** - Pour la génération sécurisée
+- **La documentation Python** - Toujours claire et complète
+
+### 👥 Contributeurs & Communauté
+Merci à tous ceux qui ont contribué à l'amélioration de Milk :
+
+- **Testeurs bêta** - Pour leurs retours précieux
+- **Utilisateurs GitHub** - Pour leurs suggestions et bug reports
+- **Communauté macOS** - Pour les retours sur l'interface native
+- **Experts en sécurité** - Pour leurs conseils sur la génération de mots de passe
+
+### 🛠️ Outils & Ressources
+- **GitHub** - Pour l'hébergement et la collaboration
+- **VS Code** - Pour l'environnement de développement
+- **SF Pro Font** - Pour la typographie macOS native
+- **Unicode Consortium** - Pour les emojis qui rendent l'interface vivante
+
+**Votre soutien compte !** Chaque étoile ⭐ motive la poursuite du développement et l'ajout de nouvelles fonctionnalités.
+
+## 🤝 Contribution
+
+Les contributions sont les bienvenues ! 
+1. Fork le projet
+2. Créez votre branche (`git checkout -b feature/nouvelle-fonctionnalite`)
+3. Commitez vos changements (`git commit -am 'Ajout nouvelle fonctionnalité'`)
+4. Push vers la branche (`git push origin feature/nouvelle-fonctionnalite`)
+5. Ouvrez une Pull Request
+
+## ⭐ Remerciements
+
+Merci à tous les utilisateurs qui ont contribué à l'amélioration de Milk !
+
+**🌟 N'oubliez pas de mettre une étoile sur GitHub si ce projet vous a aidé !**
 
 ---
 
-<div align="center">
-  
-**⭐ Si ce projet vous plaît, n'hésitez pas à lui donner une étoile ! ⭐**
-
-Made with 💙 by [Solvyrth](https://github.com/Solvyrth)
-
-</div>
+*Générez des mots de passe sécurisés avec style* ✨
