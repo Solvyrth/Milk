@@ -526,7 +526,7 @@ class PasswordGeneratorApp:
         sep2_label.pack(side='left', padx=(0, 8))
         
         # Version
-        version_label = ttk.Label(credits_frame, text="Version 3.1", style='Subtitle.TLabel')
+        version_label = ttk.Label(credits_frame, text="Version 3.1.1", style='Subtitle.TLabel')
         version_label.pack(side='left')
         
         # --- CONTAINER PRINCIPAL ---
@@ -565,12 +565,14 @@ class PasswordGeneratorApp:
         
         self.length_var = tk.StringVar(value="16")
         length_spinbox = ttk.Spinbox(length_frame, from_=4, to=64, textvariable=self.length_var, 
-                                   width=8, style='Modern.TSpinbox', font=('SF Mono', 11), justify='center')
+                                   width=8, style='Modern.TSpinbox', font=('SF Mono', 11), justify='center',
+                                   validate='all', validatecommand=(self.root.register(self.validate_length), '%P'))
         length_spinbox.pack(anchor='w')
         
         # Permettre la saisie directe dans le spinbox
         length_spinbox.bind('<Button-1>', lambda e: length_spinbox.focus_set())
         length_spinbox.bind('<FocusIn>', lambda e: length_spinbox.selection_range(0, tk.END))
+        length_spinbox.bind('<FocusOut>', lambda e: self.on_length_focus_out())
         
         # Nombre
         count_frame = ttk.Frame(params_grid, style='Card.TFrame')
@@ -582,12 +584,14 @@ class PasswordGeneratorApp:
         
         self.count_var = tk.StringVar(value="5")
         count_spinbox = ttk.Spinbox(count_frame, from_=1, to=20, textvariable=self.count_var, 
-                                  width=8, style='Modern.TSpinbox', font=('SF Mono', 11), justify='center')
+                                  width=8, style='Modern.TSpinbox', font=('SF Mono', 11), justify='center',
+                                  validate='all', validatecommand=(self.root.register(self.validate_count), '%P'))
         count_spinbox.pack(anchor='w')
         
         # Permettre la saisie directe dans le spinbox
         count_spinbox.bind('<Button-1>', lambda e: count_spinbox.focus_set())
         count_spinbox.bind('<FocusIn>', lambda e: count_spinbox.selection_range(0, tk.END))
+        count_spinbox.bind('<FocusOut>', lambda e: self.on_count_focus_out())
         
         # --- OPTIONS MODERNES ---
         options_frame = ttk.Frame(config_card, style='Card.TFrame')
@@ -769,8 +773,10 @@ class PasswordGeneratorApp:
         
         self.passphrase_words_var = tk.StringVar(value="4")
         words_spinbox = ttk.Spinbox(pass_left_col, from_=3, to=8, textvariable=self.passphrase_words_var, 
-                                  width=6, style='Modern.TSpinbox', font=('SF Mono', 11), justify='center')
+                                  width=6, style='Modern.TSpinbox', font=('SF Mono', 11), justify='center',
+                                  validate='all', validatecommand=(self.root.register(self.validate_passphrase_words), '%P'))
         words_spinbox.pack(anchor='w', pady=(2, 0))
+        words_spinbox.bind('<FocusOut>', lambda e: self.on_passphrase_words_focus_out())
         
         # Colonne droite - Options
         pass_right_col = ttk.Frame(passphrase_compact_frame, style='Card.TFrame')
@@ -898,6 +904,72 @@ class PasswordGeneratorApp:
         
         # Variables pour stocker les mots de passe
         self.generated_passwords = []
+    
+    def validate_length(self, value):
+        """Valide la longueur en temps réel"""
+        if value == "":
+            return True  # Permettre la suppression pour pouvoir retaper
+        
+        # Permettre les chiffres seulement (pas de validation de plage pendant la saisie)
+        if value.isdigit():
+            return True
+        
+        return False
+    
+    def validate_count(self, value):
+        """Valide le nombre en temps réel"""
+        if value == "":
+            return True  # Permettre la suppression pour pouvoir retaper
+        
+        # Permettre les chiffres seulement (pas de validation de plage pendant la saisie)
+        if value.isdigit():
+            return True
+        
+        return False
+    
+    def on_length_focus_out(self):
+        """Corrige automatiquement la longueur si invalide"""
+        try:
+            length = int(self.length_var.get())
+            if length < 4:
+                self.length_var.set("4")
+            elif length > 64:
+                self.length_var.set("64")
+        except ValueError:
+            self.length_var.set("16")  # Valeur par défaut
+    
+    def on_count_focus_out(self):
+        """Corrige automatiquement le nombre si invalide"""
+        try:
+            count = int(self.count_var.get())
+            if count < 1:
+                self.count_var.set("1")
+            elif count > 20:
+                self.count_var.set("20")
+        except ValueError:
+            self.count_var.set("5")  # Valeur par défaut
+    
+    def validate_passphrase_words(self, value):
+        """Valide le nombre de mots pour les passphrases"""
+        if value == "":
+            return True  # Permettre la suppression pour pouvoir retaper
+        
+        # Permettre les chiffres seulement (pas de validation de plage pendant la saisie)
+        if value.isdigit():
+            return True
+        
+        return False
+    
+    def on_passphrase_words_focus_out(self):
+        """Corrige automatiquement le nombre de mots si invalide"""
+        try:
+            words = int(self.passphrase_words_var.get())
+            if words < 3:
+                self.passphrase_words_var.set("3")
+            elif words > 8:
+                self.passphrase_words_var.set("8")
+        except ValueError:
+            self.passphrase_words_var.set("4")  # Valeur par défaut
     
     def toggle_dictionary_options(self):
         """Affiche ou cache les options du dictionnaire avec ajustement automatique"""
@@ -1144,8 +1216,6 @@ class PasswordGeneratorApp:
             self.preview_label.config(text="Erreur dans la prévisualisation")
     
     def on_generate_click(self):
-        """Fonction appelée lors du clic sur le bouton Générer"""
-        print("DEBUG: Bouton Générer cliqué!")
         self.generate_passwords()
         
     def generate_password(self, length, use_special_chars=True, use_uppercase=True, use_lowercase=True, use_numbers=True):
@@ -1171,21 +1241,49 @@ class PasswordGeneratorApp:
     def generate_passwords(self):
         """Génère les mots de passe avec affichage moderne"""
         try:
-            length = int(self.length_var.get())
-            count = int(self.count_var.get())
+            # Validation et correction automatique des valeurs
+            length_str = self.length_var.get().strip()
+            count_str = self.count_var.get().strip()
             
-            # Validation des entrées
+            # Gérer les cas de valeurs vides ou invalides
+            if not length_str or not length_str.isdigit():
+                self.length_var.set("16")
+                length = 16
+            else:
+                length = int(length_str)
+                
+            if not count_str or not count_str.isdigit():
+                self.count_var.set("5")
+                count = 5
+            else:
+                count = int(count_str)
+            
+            # Validation des entrées avec correction automatique
             if length < 4 or length > 64:
                 messagebox.showerror("❌ Erreur de validation", 
-                                   "La longueur doit être comprise entre 4 et 64 caractères.\n\nVeuillez ajuster la valeur et réessayer.", 
+                                   "La longueur doit être comprise entre 4 et 64 caractères.\n\nLa valeur a été automatiquement corrigée.", 
                                    parent=self.root)
-                return
+                # Corriger automatiquement
+                if length < 4:
+                    self.length_var.set("4")
+                    length = 4
+                elif length > 64:
+                    self.length_var.set("64")
+                    length = 64
+                # Ne pas retourner, continuer avec la valeur corrigée
                 
             if count < 1 or count > 20:
                 messagebox.showerror("❌ Erreur de validation", 
-                                   "Le nombre de mots de passe doit être entre 1 et 20.\n\nVeuillez ajuster la valeur et réessayer.", 
+                                   "Le nombre de mots de passe doit être entre 1 et 20.\n\nLa valeur a été automatiquement corrigée.", 
                                    parent=self.root)
-                return
+                # Corriger automatiquement
+                if count < 1:
+                    self.count_var.set("1")
+                    count = 1
+                elif count > 20:
+                    self.count_var.set("20")
+                    count = 20
+                # Ne pas retourner, continuer avec la valeur corrigée
             
             # Validation spécifique au mode dictionnaire
             if self.use_dictionary_var.get():
