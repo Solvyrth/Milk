@@ -1,6 +1,12 @@
-# ✨ Milk - Générateur de Mots de Passe v3.1
+# ✨ Milk - Générateur de Mots de Passe 3.1.1
 
 Un générateur de mots de passe élégant et sécurisé avec interface macOS native.
+
+## 🆕 Nouveautés Version 3.1.1
+### 🎭 Correction de bugs
+- **Correction** de bug sur la gestion de valeur sur "longueur du mot de passe" & "Passphrase". Il y avait un bug quand on rentrait une valeur incorrecte, on ne pouvait plus modifier les valeurs dans les 2 cas (après ouverture de le popup d'erreur).
+- **Gestion** des valeurs revue.
+      
 
 ## 🆕 Nouveautés Version 3.1
 
